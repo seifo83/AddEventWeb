@@ -1,0 +1,10 @@
+// Importer FontAwesome
+
+@import "~@fortawesome/fontawesome-free/css/all.min.css";
+
+
+//configuration & import de Bulma
+
+$primary: hsl(214, 89%, 50%);
+
+@import"~bulma";
