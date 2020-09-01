@@ -25,11 +25,13 @@
     <div id="navbarBasicExample" class="navbar-menu">
         <div class="navbar-start">
             <a class="navbar-item" href="#">
-                Event
-            </a>
-
-            <a class="navbar-item" href="#">
                 Nouveautés
+            </a>
+            <a class="navbar-item" href="#">
+                Mes événements
+            </a>
+            <a class="navbar-item" href="#">
+                Mes Participations
             </a>
         </div>
         <div class="navbar-end">
@@ -45,7 +47,7 @@
                     </a>
 
                     {% else %}
-                        <a class="button is-primary is-small" href="#">
+                        <a class="button is-primary is-small" href="{{path('inscription')}}">
                             <strong>Inscription</strong>
                         </a>
                         <a class="button is-light is-small" href="{{path('app_login')}}">
