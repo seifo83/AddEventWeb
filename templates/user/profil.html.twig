@@ -1,0 +1,18 @@
+{% extends "_template.html.twig" %}
+{% block title %}
+    Profil {{user.pseudo }}
+{% endblock %}
+
+
+
+
+{% block content %}
+    <div class="section">
+        <h1 class="box title">
+            {{user.pseudo}} <i class="fas fa-globe-americas"></i><br>
+            <small> Bienvenue sur votre profile </small>
+           
+        </h1>
+        {% include 'includes/flash.html.twig' %}
+    </div>
+{% endblock %}
