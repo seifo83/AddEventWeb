@@ -32,19 +32,29 @@
                 Nouveautés
             </a>
         </div>
-
         <div class="navbar-end">
             <div class="navbar-item">
                 <div class="buttons">
+                    {% if app.user %}
                     <a class="button is-primary is-small" href="#">
-                        <strong>Inscription</strong>
+                        <span class="icon"><i class="fas fa-user-circle fa-2x"></i></span>&ensp;
+                        <strong> {{ app.user.pseudo }}</strong>
                     </a>
-                    <a class="button is-light is-small" href="{{path('app_login')}}">
-                        Connexion
+                    <a class="button is-danger is-small" href="{{path('app_logout')}}">
+                        Déconnexion
                     </a>
+
+                    {% else %}
+                        <a class="button is-primary is-small" href="#">
+                            <strong>Inscription</strong>
+                        </a>
+                        <a class="button is-light is-small" href="{{path('app_login')}}">
+                            Connexion
+                        </a>
+                    
+                    {% endif %}
                 </div>
             </div>
-
             <a class="navbar-item">
                 <form action="#">
                     <div class="field has-addons">
