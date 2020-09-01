@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block content %}
+        
     <div class="columns is-centered section">
         <div class="column is-one-third box">
             <h1 class="title has-text-primary has-text-centered">Connexion</h1>
@@ -23,6 +24,7 @@
 
 
             {# formulaire de connexion #}
+            {% include 'includes/flash.html.twig' %} 
             <form method="post">
                 <div class="field">
                     <label class="label" for="inputEmail">Email ou pseudo</label>
