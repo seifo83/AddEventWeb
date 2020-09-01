@@ -51,7 +51,12 @@
                         <a class="button is-light is-small" href="{{path('app_login')}}">
                             Connexion
                         </a>
-                    
+                    {% endif %}
+                    {% if is_granted("ROLE_EDITOR") %}
+                            <a class="button is-primary is-small" href="">
+                                <span class="icon"><i class="fas fa-user-circle fa-2x"></i></span>&ensp;
+                        <strong> Back_Office</strong>
+                            </a>
                     {% endif %}
                 </div>
             </div>
