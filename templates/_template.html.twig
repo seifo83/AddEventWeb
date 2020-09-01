@@ -38,10 +38,28 @@
             <div class="navbar-item">
                 <div class="buttons">
                     {% if app.user %}
-                    <a class="button is-primary is-small" href="#">
-                        <span class="icon"><i class="fas fa-user-circle fa-2x"></i></span>&ensp;
-                        <strong> {{ app.user.pseudo }}</strong>
-                    </a>
+                   
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="button is-primary is-small" href="{{path('account_profil')}}">
+                            <span class="icon"><i class="fas fa-user-circle fa-2x"></i></span>&ensp;
+                            <strong> {{ app.user.pseudo }}</strong>
+                        </a>
+                        <div class="navbar-dropdown">
+                          <a class="navbar-item" href="{{path('info_profil')}}">
+                            <span><i class="fas fa-user"></i></span>&ensp;
+                            Information Personnel
+                          </a>
+                          <a class="navbar-item is-active" href="{{path('mdp_profil')}}">
+                            <span><i class="fas fa-lock"></i></span>&ensp;
+                            Confidentialité
+                          </a>
+                          <a class="navbar-item" href="">
+                            <span><i class="far fa-credit-card"></i></span>&ensp;
+                            Payment
+                          </a>
+
+                      </div>
+                    </div>
                     <a class="button is-danger is-small" href="{{path('app_logout')}}">
                         Déconnexion
                     </a>
