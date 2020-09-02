@@ -4,18 +4,17 @@
 
 {% block content %}
   
-    <div class="section">
-        <h1 class="box title">
+    <div class="columns is-mobile section">
+        <h3 class="box subtitle column is-three-fifths is-offset-one-fifth">
            {{user.pseudo}} <i class="fas fa-address-card"></i><br> 
             <small> Modifier vos informations personnel</small>
            
         </h1>
         {# Formuliare 1: pour modifier Email ou Pseudo  #}
-        
+    </div>
                 {{ form_start(account_profil) }}
-        <div class="columns is-multiline is-desktop">
-            <div class="column">
-                <div class="box">
+            <div class="columns is-centered section">
+                <div class="column is-one-third box">
                     <h2 class=""></h2><br>
                     {{ form_row(account_profil.nom, {label: "Nom:"}) }}
                     {{ form_row(account_profil.prenom, {label: "Prénom:"}) }}
@@ -27,7 +26,6 @@
             {{ form_end(account_profil) }}
                 </div>
 
-            </div>
 
     </div>
 {% endblock %}

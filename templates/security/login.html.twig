@@ -27,14 +27,14 @@
             {% include 'includes/flash.html.twig' %} 
             <form method="post">
                 <div class="field">
-                    <label class="label" for="inputEmail">Email ou pseudo</label>
+                    <label class="label" for="inputEmail"> <span><i class="fas fa-user"></i></span> Email ou pseudo</label>
                     <div class="control">
                         <input class="input" type="text" value="{{ last_username }}" name="username" id="inputEmail" required autofocus>
                     </div>
                 </div>
 
                 <div class="field">
-                    <label class="label" for="inputPassword">Mot de passe</label>
+                    <label class="label" for="inputPassword"><span><i class="fas fa-key"></i></span> Mot de passe</label>
                     <div class="control">
                         <input class="input" type="password" name="password" id="inputPassword" required>
                     </div>

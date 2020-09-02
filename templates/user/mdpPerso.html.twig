@@ -4,26 +4,28 @@
 
 {% block content %}
   
-    <div class="section">
-        <h1 class="box title">
-            {{user.pseudo}} <i class="fas fa-key"></i><br>
+    <div class="columns is-mobile section">
+        <h3 class="box subtitle column is-three-fifths is-offset-one-fifth">
+            {{user.pseudo}} <span><i class="fas fa-user-shield"></i></span><br>
             <small> Modifier votre mots de passe </small>
-        </h1>
+        </h3>
+    </div>
 
         {# Formuliare 2: pour modifier mots de passe  #}
-        <div class="column">
-            <div class="box">
+        <div class="columns is-centered section">
+            <div class="column is-one-third box">
+        
                 {{ form_start(mdp_account) }}
 
-                        {{ form_row(mdp_account.plainPassword.first, {label: 'Mot de passe:'}) }}
-                        {{ form_row(mdp_account.plainPassword.second, {label: 'Confirmation votre Mot de passe:'}) }}
+                <span><i class="fas fa-unlock-alt"></i></span>{{ form_row(mdp_account.plainPassword.first, {label: 'Mot de passe:'}) }}
+                <span><i class="fas fa-lock"></i></span>{{ form_row(mdp_account.plainPassword.second, {label: 'Confirmation votre Mot de passe:'}) }}
                         <button type="submit" class="button is-primary is-fullwidth">Valider</button>
                 {{ form_end(mdp_account) }}
 
             </div>
         </div>
+  
 
-    </div>
 {% endblock %}
 
 
