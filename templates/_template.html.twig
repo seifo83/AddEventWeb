@@ -33,6 +33,18 @@
             <a class="navbar-item" href="#">
                 Mes Participations
             </a>
+            <div class="navbar-item">
+                <div class="buttons">
+                    <a class="button is-primary is-small" href="{{path('add_event')}}">
+                        <strong>
+                            <span class="icon">
+                                <i class="far fa-calendar-check fa-x"></i>
+                            </span>&ensp;
+                                YourEvent
+                        </strong>
+                    </a>
+                </div>
+            </div>
         </div>
         <a class="navbar-item">
             <form action="#">
@@ -52,7 +64,6 @@
             <div class="navbar-item">
                 <div class="buttons">
                     {% if app.user %}
-                   
                     <div class="navbar-item has-dropdown is-hoverable">
                         <a class="button is-primary is-small" href="{{path('account_profil')}}">
                             <span><i class="fas fa-user"></i></span>&ensp;
@@ -75,7 +86,7 @@
                       </div>
                     </div>
                     <a class="button is-danger is-small" href="{{path('app_logout')}}">
-                        Déconnexion
+                       <span><i class="fas fa-sign-out-alt"></i></span>
                     </a>
 
                     {% else %}

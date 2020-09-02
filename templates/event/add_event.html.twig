@@ -1,0 +1,24 @@
+{% extends "_template.html.twig" %}
+
+{% block title %}Ajouter Event{% endblock %}
+
+{% block content %}
+  
+    <div class="section">
+        <h1 class="title">Ajouter un événement</h1>
+    
+
+        {{ form_start(add_event) }}
+            {{ form_row(add_event.nom, {label: 'Titre:'}) }}
+            {{ form_row(add_event.description, {label: 'Description:'}) }}
+            {{ form_row(add_event.lieu, {label: "Lieu:"}) }}
+            {{ form_row(add_event.date, {label: "Date:"}) }}
+            {{ form_row(add_event.price, {label: 'prix:'}) }}
+            <button type="submit" class="button is-primary is-fullwidth">S'inscrire</button>
+
+        {{ form_end(add_event) }}
+
+    </div>
+{% endblock %}
+
+
