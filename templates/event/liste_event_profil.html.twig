@@ -1,0 +1,52 @@
+{% extends '_template.html.twig' %}
+
+{% block title %} Liste Event {% endblock %}
+
+{% block content %}
+    <div class="section">
+        <div class="box">
+            <h1 class="title"> {{ user.pseudo}} </h1>
+            <strong>Liste des événements </strong>
+        </div>
+
+            {% for event in event_list %}
+                
+            <div class="box">
+                <article class="media">
+                    <div class="media-left">
+                        <figure class="image is-128x128">
+                            <img src="https://loremflickr.com/256/256/happy/all?" alt="Image">
+                        </figure>
+                    </div>
+                    <div class="media-content">
+                        <div class="content">
+                            <p>
+                                <a href="" class="has-text-primary">
+                                    <strong>{{event.nom}}</strong>
+                                </a>
+                                <small>{{ event.date|date('d/m/Y')}}</small>
+                                <br>
+                                <small>{{ event.description|slice(0, 50)}}</small><br>
+                                <small>{{ event.price}}</small><br>
+                            </p>
+                            <div class="field is-grouped is-grouped-right">
+                                <p class="control">
+                                  <a class="button is-primary">
+                                    Submit
+                                  </a>
+                                </p>
+                                <p class="control">
+                                  <a class="button is-light">
+                                    Cancel
+                                  </a>
+                                </p>
+                              </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        {% endfor %}
+
+    </div>
+
+    {% endblock %}

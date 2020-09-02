@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Event;
 use App\Form\EventFormType;
+use App\Repository\EventRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,14 +24,52 @@ class EventController extends AbstractController
 
 
     /**
-     * @Route("/event", name="event")
+     * lister les évenements
+     * @Route("/liste_event", name="liste_event")
      */
-    public function index()
+    public function liste(EventRepository $event)
     {
-        return $this->render('event/index.html.twig', [
-            'controller_name' => 'EventController',
+        //dd($event);
+
+        return $this->render('event/liste_event.html.twig', [
+            'event_list' => $event->findAll(),
         ]);
     }
+
+    /**
+     * lister les évenements
+     * @Route("/liste_event_profil", name="liste_event_profil")
+     */
+    public function liste_Evprofil(EventRepository $eventRepository)
+    {
+        $user = $this->getUser();
+        //dd($user);
+
+        $event = $eventRepository->findBy(['user' => $this->getUser()]);
+        
+
+        return $this->render('event/liste_event_profil.html.twig', [
+            'event_list' => $event,
+            'user' => $user
+        ]);
+    }
+
+
+
+    /**
+     * thémes évenements
+     * @Route("/theme_event", name="theme_event")
+     */
+    public function theme()
+    {
+        return $this->render('event/theme_event.html.twig');
+    }
+
+
+
+
+
+
 
 
     /**
@@ -44,10 +84,16 @@ class EventController extends AbstractController
          // Traitement du Formulaire de modification Pseudo ou Email
          if($form->isSubmitted() && $form->isValid())
          {
+            $event = $form->getData();
+            $user = $this->getUser();
+            $event->setUser($user);
+
+
+            $this->manager->persist($event);
              $this->manager->flush();
  
-             $this->addFlash('success', 'Votre évenement à été mise à jour !');
-             return $this->redirectToRoute('app_logout');
+             $this->addFlash('success', 'Votre évenement à été ajouter!');
+             return $this->redirectToRoute('liste_event_profil');
          }
 
          return $this->render('event/add_event.html.twig', [
