@@ -1,0 +1,32 @@
+{% extends '_template.html.twig' %}
+
+ {% block title %}
+     Supprimer Event
+ {% endblock %}
+
+ {% block content %}
+     <div class="section">
+         <h1 class="title">
+             Supprimer un événement
+         </h1>
+
+         <article class="message is-danger">
+             <div class="message-header">
+                 <p>Confirmation de suppression</p>
+             </div>
+             <div class="message-body">
+                 {{ form_start(delete_form) }}
+
+                 {{ form_row(delete_form.confirmation, {
+                     label: 'Je confirme la suppression définitive de l\'événement "' ~ event.nom ~ '" prévue pour le : ' ~ event.date|date('d/m/Y')
+                 }) }}
+
+                 <button type="submit" class="button is-danger is-fullwidth">
+                     Supprimer
+                 </button>
+
+                 {{ form_end(delete_form) }}
+             </div>
+         </article>
+     </div>
+ {% endblock %}
