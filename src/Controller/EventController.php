@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Event;
+use App\Form\ConfirmDeletionFormType;
 use App\Form\EventFormType;
 use App\Repository\EventRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -127,19 +129,31 @@ class EventController extends AbstractController
         ]);
     }
 
-
     /**
      * suppression evenement
-     * @Route("/delate/{id}", name="delate")
-     * 
+     * @Route("/event_delete/{id}", name="event_delete")
+     * @IsGranted("DELETE_EVENT", subject="event")
      */
-    public function supprim(Event $event)
+    public function supprim(Event $event, Request $request)
     {
-        $this->manager->remove($event);
-        $this->manager->flush();
+        $deleteForm = $this->createForm(ConfirmDeletionFormType::class);
+         $deleteForm->handleRequest($request);
 
-        $this->addFlash('danger', 'L\'événement a été supprimé.');
-            return $this->redirectToRoute('liste_event_profil');
+         if ($deleteForm->isSubmitted() && $deleteForm->isValid()) {
+            $this->manager->remove($event);
+            $this->manager->flush();
+
+            $this->addFlash('danger', 'L\'événement a été supprimée');
+            return $this->redirectToRoute('liste_event_profil', [
+                'id' => $event->getUser()->getId(),
+            ]);
+        }
+
+        return $this->render('event/event_delete.html.twig', [
+            'event' => $event,
+            'delete_form' => $deleteForm->createView(),
+        ]);
+
     }
 
 
