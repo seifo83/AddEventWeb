@@ -16,6 +16,7 @@ class ParticipeController extends AbstractController
     public function index(Event $event)
     {
         dd($event);
+
             $this->addFlash('success', 'Vous participer à l\'événemnt');
             return $this->redirectToRoute('event_page', ['id' => $event->getId()]);
     }
