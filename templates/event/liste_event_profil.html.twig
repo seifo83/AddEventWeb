@@ -3,6 +3,7 @@
 {% block title %} Liste Event {% endblock %}
 
 {% block content %}
+    {% include 'includes/flash.html.twig' %}
     <div class="section">
         <div class="box">
             <h1 class="title"> {{ user.pseudo}} </h1>
@@ -18,8 +19,8 @@
                             <img src="https://loremflickr.com/256/256/happy/all?" alt="Image">
                         </figure>
                     </div>
-                    <div class="media-content">
-                        <div class="content">
+                    <div class="media-content is-mobile">
+                        <div class="content is-three-fifths is-offset-one-fifth">
                             <p>
                                 <a href="" class="has-text-primary">
                                     <strong>{{event.nom}}</strong>
@@ -27,16 +28,18 @@
                                 <small>{{ event.date|date('d/m/Y')}}</small>
                                 <br>
                                 <small>{{ event.description|slice(0, 50)}}</small><br>
-                                <small>{{ event.price}}</small><br>
+                                <small>prix: {{ event.price}}€</small><br>
                             </p>
                             <div class="field is-grouped is-grouped-right">
                                 <p class="control">
-                                  <a class="button is-primary">
+                                  <a class="button is-primary" href="{{path('modif_event', {id: event.id} )}}">
+                                    <span><i class="fas fa-edit"></i>&ensp;</span>
                                     Submit
                                   </a>
                                 </p>
                                 <p class="control">
-                                  <a class="button is-light">
+                                  <a class="button is-danger" href="{{path('delate', {id: event.id} )}}">
+                                    <span><i class="fas fa-trash-alt"></i>&ensp;</span>
                                     Cancel
                                   </a>
                                 </p>

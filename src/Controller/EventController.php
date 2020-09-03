@@ -103,5 +103,49 @@ class EventController extends AbstractController
     }
 
 
+    /**
+     * Modifier un évenement
+     * @Route("/modif_event/{id}", name="modif_event")
+     */
+    public function modi_event(Request $request, Event $event)
+    {
+        $form = $this->createForm(EventFormType::class, $event);
+        $form->handleRequest($request);
+
+         // Traitement du Formulaire de modification Pseudo ou Email
+         if($form->isSubmitted() && $form->isValid())
+         {
+             $this->manager->flush();
+ 
+             $this->addFlash('success', 'Votre évenement à été modifier!');
+             return $this->redirectToRoute('liste_event_profil');
+         }
+
+         return $this->render('event/add_event.html.twig', [
+
+            'add_event' => $form->createView(),
+        ]);
+    }
+
+
+    /**
+     * suppression evenement
+     * @Route("/delate/{id}", name="delate")
+     * 
+     */
+    public function supprim(Event $event)
+    {
+        $this->manager->remove($event);
+        $this->manager->flush();
+
+        $this->addFlash('danger', 'L\'événement a été supprimé.');
+            return $this->redirectToRoute('liste_event_profil');
+    }
+
+
+
+
+
+
 
 }
