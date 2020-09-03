@@ -1,0 +1,54 @@
+{% extends "_template.html.twig" %}
+
+
+{% block title %} l'événement: {{ event.nom }} {% endblock %}
+
+
+
+
+
+
+{% block content %}
+
+        <section class="section">
+            <div class="columns">
+                <div class="column is-two-fifth">
+                    <figure class="image is-1by1">
+                        <img src="https://loremflickr.com/1024/1024/happy/all?lock={{ event.id }}">
+                    </figure>
+                </div>
+
+                <div class="column">
+                    <h1 class="title has-text-primary">
+                        {{ event.nom }}
+                    </h1><br>
+                    <h2 class="subtitle">
+                        Organisé par:
+                        <a href="">
+                            <strong>{{ event.user.nom }} {{ event.user.prenom }}</strong> 
+                        </a><br>
+                        <h6 class="is-size-7">
+                            <span class="icon has-text-info"><i class="fas fa-info-circle"></i></span>
+                            <span>Date: {{ event.date|date('d/m/Y') }}</span>
+                        </h6>
+                        <h6 class="is-size-7">
+                            <span class="icon has-text-info"><i class="fas fa-map-marker-alt"></i></span>
+                            <span>Lieu {{ event.lieu }}</span>
+                        </h6>
+                    </h2>
+                    <br>
+                    <p class="content">
+                        <strong>Description: </strong> <br>
+                        {{ event.description }}
+                    </p>
+                    <hr>
+                    <button class="button box is-danger" href="">
+                        Participer
+                    </button>
+                </div>
+            </div>
+        </section>
+
+
+
+{% endblock %}

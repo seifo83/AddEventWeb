@@ -39,7 +39,24 @@ class EventController extends AbstractController
     }
 
     /**
-     * lister les évenements
+     * Page d'un Event
+     * @Route("/event/{id}", name="event_page")
+     */
+    public function artistPage(Event $event)
+    {
+        //dd($artist);
+        return $this->render('event/Page_event.html.twig', [
+            'event' => $event
+
+        ]);
+
+    }
+
+
+
+
+    /**
+     * lister les évenements par profil
      * @Route("/liste_event_profil", name="liste_event_profil")
      */
     public function liste_Evprofil(EventRepository $eventRepository)
