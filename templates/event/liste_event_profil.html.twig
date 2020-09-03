@@ -37,12 +37,14 @@
                                     Submit
                                   </a>
                                 </p>
+                            {% if is_granted("DELETE_EVENT", event) %}
                                 <p class="control">
-                                  <a class="button is-danger" href="{{path('delate', {id: event.id} )}}">
+                                  <a class="button is-danger" href="{{path('event_delete', {id: event.id} )}}">
                                     <span><i class="fas fa-trash-alt"></i>&ensp;</span>
                                     Cancel
                                   </a>
                                 </p>
+                            {% endif %}
                               </div>
                         </div>
                     </div>

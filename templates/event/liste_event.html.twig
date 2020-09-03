@@ -7,9 +7,7 @@
 
     <div class="section">
         <h1 class="title"> Event: {{ event_list|length }} </h1>
-        <div class="columns is-multiline">
             {% for event in event_list %}
-                <div class="column is-one-third">
                     <div class="box">
                         <article class="media">
                             <div class="media-left">
@@ -20,19 +18,26 @@
                             <div class="media-content">
                                 <div class="content">
                                     <p>
-                                        <a href="" class="has-text-primary">
+                                        <a href="{{path('event_page', {id: event.id})}}" class="has-text-primary">
                                             <strong>{{event.nom}}</strong>
-                                        </a><br>
-                                        <small>Date événement:<br> {{ event.date|date('Y.M.j')}}</small><br>
-                                        {{event.description|slice(0, 20)}}
+                                        </a>
+                                        <br>
+                                        <small>Date événement: {{ event.date|date('Y.M.j')}}</small>
+                                        <br>
+                                        <small>Organisé par: 
+                                            <a href="" class="has-text-black">
+                                                <strong>{{event.user.nom}}</strong>
+                                            </a>
+                                        </small><br>
+                                        
+                                        {{event.description|slice(0, 50)}}
                                     </p>
                                 </div>
                             </div>
                         </article>
                     </div>
-                </div>
             {% endfor %}
-    </div>
+ 
     </div>
 
 {% endblock %}
