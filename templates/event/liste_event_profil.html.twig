@@ -7,7 +7,8 @@
     <div class="section">
         <div class="box">
             <h1 class="title"> {{ user.pseudo}} </h1>
-            <strong>Liste des événements </strong>
+            <strong>Liste des événements:</strong>
+            <p>Vous organisez: {{ event_list|length }} évenements</p> 
         </div>
 
             {% for event in event_list %}
@@ -37,7 +38,7 @@
                                     Submit
                                   </a>
                                 </p>
-                            {% if is_granted("DELETE_EVENT", event) %}
+                            {% if is_granted("EVENT_PARTICIPATION", event) %}
                                 <p class="control">
                                   <a class="button is-danger" href="{{path('event_delete', {id: event.id} )}}">
                                     <span><i class="fas fa-trash-alt"></i>&ensp;</span>

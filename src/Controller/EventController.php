@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class EventController extends AbstractController
 {
 
-    private $manger;
+    private $manager;
 
     public function __construct(EntityManagerInterface $entityManager)
     {
@@ -42,7 +42,7 @@ class EventController extends AbstractController
      * Page d'un Event
      * @Route("/event/{id}", name="event_page")
      */
-    public function artistPage(Event $event)
+    public function eventPage(Event $event)
     {
         //dd($artist);
         return $this->render('event/Page_event.html.twig', [
@@ -59,13 +59,12 @@ class EventController extends AbstractController
      * lister les évenements par profil
      * @Route("/liste_event_profil", name="liste_event_profil")
      */
-    public function liste_Evprofil(EventRepository $eventRepository)
+    public function liste_event_profil(EventRepository $eventRepository)
     {
         $user = $this->getUser();
         //dd($user);
 
         $event = $eventRepository->findBy(['user' => $this->getUser()]);
-        
 
         return $this->render('event/liste_event_profil.html.twig', [
             'event_list' => $event,
@@ -172,6 +171,10 @@ class EventController extends AbstractController
         ]);
 
     }
+
+
+
+    
 
 
 

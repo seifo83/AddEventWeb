@@ -1,0 +1,56 @@
+{% extends '_template.html.twig' %}
+
+{% block title %} Participation liste {% endblock %}
+
+{% block content %}
+    {% include 'includes/flash.html.twig' %}
+    <div class="section">
+        <div class="box">
+            <h1 class="title"> {{ app.user.pseudo}} </h1>
+            <strong>participation liste:</strong>
+            <p>Vous participez à {{ app.user.participation|length }} évenements</p> 
+        </div>
+
+        {% for particip in app.user.participation %}
+                
+        <div class="box">
+            <article class="media">
+                <div class="media-left">
+                    <figure class="image is-128x128">
+                        <img src="https://loremflickr.com/256/256/happy/all?" alt="Image">
+                    </figure>
+                </div>
+                <div class="media-content is-mobile">
+                    <div class="content is-three-fifths is-offset-one-fifth">
+                        <p>
+                            <a href="" class="has-text-primary">
+                                <strong>{{particip.nom}}</strong>
+                            </a>
+                            <small>{{ particip.date|date('d/m/Y')}}</small>
+                            <br>
+                            <small>{{ particip.description|slice(0, 50)}}</small><br>
+                            <small>prix: {{ particip.price}}€</small><br>
+                        </p>
+                        <div class="field is-grouped is-grouped-right">
+                        {% if is_granted("EVENT_PARTICIPATION", particip ) %}
+                            <p class="control">
+                              <a class="button is-danger" href="{{path('delete_participe_profil', {id: particip.id, token:csrf_token('delete_event')} )}}">
+                                <span><i class="fas fa-trash-alt"></i>&ensp;</span>
+                                Cancel
+                              </a>
+                            </p>
+                        {% endif %}
+                          </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    {% endfor %}
+
+</div>
+
+
+
+    </div>
+
+    {% endblock %}
