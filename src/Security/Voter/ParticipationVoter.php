@@ -14,7 +14,7 @@ class ParticipationVoter extends Voter
     {
         // replace with your own logic
         // https://symfony.com/doc/current/security/voters.html
-        return $attribute === 'ADD_EVENT'
+        return $attribute === 'EVENT_PARTICIPATION'
             && $subject instanceof Event;
     }
 

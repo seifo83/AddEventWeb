@@ -3,6 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Event;
+use App\Entity\User;
+use App\Repository\EventRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -33,13 +36,13 @@ class ParticipeController extends AbstractController
 
     /**
      * @Route("/add_part/{id}", name="participe_profil")
-     *
+     * * @IsGranted("ROLE_USER")
      */
     public function add_parti(Event $event, Request $request)
     {
         $token = $request->query->get('token');
-        if ($this->isCsrfTokenValid('add_event', $token)) {
-
+        if ($this->isCsrfTokenValid('EVENT_PARTICIPATION', $token)) {
+ 
            $this->getUser()->addParticipation($event);
             $this->manager->flush();
         }
@@ -70,9 +73,19 @@ class ParticipeController extends AbstractController
 
     /**
      * Liste participation par profil
-     * @Route("/Liste_part/{id}", name="participe_profil_liste")
+     * @Route("/Liste_part", name="participe_profil_liste")
      */
-    public function liste_parti(Event $event, Request $request)
+    public function liste_parti()
+    {
+        return $this->render('participe/liste_part_profil.html.twig');
+    }
+
+
+    /**
+     * @Route("/delete_part_profil/{id}", name="delete_participe_profil")
+     *
+     */
+    public function delete_parti_prof(Event $event, Request $request)
     {
         $token = $request->query->get('token');
         if ($this->isCsrfTokenValid('delete_event', $token)) {
@@ -82,8 +95,9 @@ class ParticipeController extends AbstractController
         }
         
         $this->addFlash('danger', 'Vous avez annuler votre participation à l\'événement');
-        return $this->redirectToRoute('event_page', ['id' => $event->getId()]);
+        return $this->render('participe/liste_part_profil.html.twig');
     }
+
 
 
 
