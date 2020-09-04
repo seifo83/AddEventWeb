@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class EventController extends AbstractController
 {
 
-    private $manger;
+    private $manager;
 
     public function __construct(EntityManagerInterface $entityManager)
     {

@@ -7,7 +7,8 @@
     <div class="section">
         <div class="box">
             <h1 class="title"> {{ user.pseudo}} </h1>
-            <strong>Liste des événements </strong>
+            <strong>Liste des événements:</strong>
+            <p>Vous participez à {{ event_list|length }} évenements</p> 
         </div>
 
             {% for event in event_list %}

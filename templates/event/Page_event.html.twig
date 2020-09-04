@@ -9,7 +9,7 @@
 
 
 {% block content %}
-
+    {% include 'includes/flash.html.twig' %}
         <section class="section">
             <div class="columns">
                 <div class="column is-two-fifth">
@@ -22,9 +22,20 @@
                     <h1 class="title has-text-primary">
                         {{ event.nom }}
                     </h1><br>
-                    <a class="button box is-danger" href="{{path('participe_event', {id: event.id})}}">
-                        Participer
-                    </a><br>
+                    <div class="columns is-centered ">
+                    <div class="column is-4">
+                    {% if is_granted("ADD_EVENT", event) %}
+                        <a class="button is-5 is-fullwidth is-danger" href="{{path('participe_profil_delete', {id: event.id, token: csrf_token('delete_event')})}}">
+                            <strong>Annuler</strong>
+                        </a>
+                    {% else %}
+                        <a class="button is-5 is-fullwidth  is-danger" href="{{path('participe_profil', {id: event.id, token: csrf_token('add_event')})}}">
+                            <strong>Participer</strong>
+                        </a>
+                    {% endif %}
+                    </div>
+                </div>
+                    <br>
                     <h2 class="subtitle">
                         Organisé par:
                         <a href="">
@@ -45,22 +56,21 @@
                         {{ event.description }}
                     </p>
                     <hr>
-                    
+
                     <h1 class="title has-text-primary">
                         Liste des participants: {{ event.users|length }}
                     </h1><br>
                     <div class="columns is-multiline">
-                        
+
                         {% for item in event.users %}
                             <div class="column is-one-fifth">
                             <figure class="image is-64x64">
                                 <img class="is-rounded" src="https://robohash.org/{{ item.nom }}?set=set5">
                             </figure>
-                            <div>{{item.prenom}}</div>
+                            <div>{{item.pseudo}}</div>
 
                         </div>
                         {% endfor %}
-                        
                     </div>
 
 
