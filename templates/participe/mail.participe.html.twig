@@ -1,0 +1,29 @@
+{% extends "_template.html.twig" %}
+
+{% block title %}Envoyer Event{% endblock %}
+
+{% block content %}
+  
+        
+    
+        <div class="columns is-mobile section">
+            <h1 class="box title column is-three-fifths is-offset-one-fifth">
+                <span><i class="fas fa-envelope"></i></span>
+                Inviter un ami par email: 
+            </h1>
+        </div>
+
+        {# Formuliare : pour envoyer un mail  #}
+        <div class="columns is-centered ">
+            <div class="column is-three-fifths box">
+
+        {{ form_start(mail_event) }}
+            {{ form_row(mail_event.email, {label: 'Titre:'}) }}
+            {{ form_row(mail_event.description, {label: 'Contenu:'}) }}
+            <button type="submit" class="button is-primary is-fullwidth">Envoyer</button>
+        
+        {{ form_end(mail_event) }}
+    </div>
+{% endblock %}
+
+

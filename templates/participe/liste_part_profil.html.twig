@@ -6,51 +6,88 @@
     {% include 'includes/flash.html.twig' %}
     <div class="section">
         <div class="box">
-            <h1 class="title"> {{ app.user.pseudo}} </h1>
-            <strong>participation liste:</strong>
-            <p>Vous participez à {{ app.user.participation|length }} évenements</p> 
+            <article class="media">
+              <div class="media-left">
+                <figure class="image is-64x64">
+                    <img class="is-rounded" src="https://robohash.org/{{ app.user.nom }}?set=set5">
+                </figure>
+              </div>
+              <div class="media-content">
+                <div class="content">
+                  <p>
+                    <strong class="title">{{ app.user.pseudo}}</strong>
+                    <br>
+                    <strong class="has-text-primary">Participation liste:</strong><br>
+                    Vous participez à {{ app.user.participation|length }} évenements.
+                  </p>
+                </div>
+            </div>
         </div>
 
         {% for particip in app.user.participation %}
-                
-        <div class="box">
-            <article class="media">
-                <div class="media-left">
-                    <figure class="image is-128x128">
-                        <img src="https://loremflickr.com/256/256/happy/all?" alt="Image">
-                    </figure>
-                </div>
-                <div class="media-content is-mobile">
-                    <div class="content is-three-fifths is-offset-one-fifth">
-                        <p>
-                            <a href="" class="has-text-primary">
-                                <strong>{{particip.nom}}</strong>
-                            </a>
-                            <small>{{ particip.date|date('d/m/Y')}}</small>
-                            <br>
-                            <small>{{ particip.description|slice(0, 50)}}</small><br>
-                            <small>prix: {{ particip.price}}€</small><br>
-                        </p>
-                        <div class="field is-grouped is-grouped-right">
-                        {% if is_granted("EVENT_PARTICIPATION", particip ) %}
-                            <p class="control">
-                              <a class="button is-danger" href="{{path('delete_participe_profil', {id: particip.id, token:csrf_token('delete_event')} )}}">
-                                <span><i class="fas fa-trash-alt"></i>&ensp;</span>
-                                Cancel
-                              </a>
-                            </p>
-                        {% endif %}
-                          </div>
+            <div class="columns box">
+                <div class="column">
+                    <article class="media">
+                        <div class="media-left">
+                            <figure class="image is-128x128">
+                                <img src="https://loremflickr.com/256/256/happy/all?" alt="Image">
+                            </figure>
+                        </div>
+                        <div class="media-content is-mobile">
+                            <div class="content is-three-fifths is-offset-one-fifth">
+                                <p>
+                                    <a href="" class="has-text-primary">
+                                        <strong>{{particip.nom}}</strong>
+                                    </a>
+                                    <br>
+                                    <small>Date: {{ particip.date|date('d/m/Y')}}</small>
+                                    <br>
+                                    <small>Description: {{ particip.description|slice(0, 50)}}</small><br>
+                                    <small>prix: {{ particip.price}}€</small><br>
+                                    <div class="field ">
+                                        {% if is_granted("EVENT_PARTICIPATION", particip ) %}
+                                            <p class="control">
+                                            <a class="button is-danger" href="{{path('delete_participe_profil', {id: particip.id, token:csrf_token('delete_event')} )}}">
+                                                <span><i class="fas fa-trash-alt"></i>&ensp;</span>
+                                                Cancel
+                                            </a>
+                                            </p>
+                                        {% endif %}
+                                    </div>
+                                </p>
+                            </article>
+                        </div>
+                            {# /////// #}
+                            <div class="column is-three-fifths">
+                                <article class="media is-centered ">
+                                    <div class="media-content is-mobile">
+                                            <strong class="has-text-primary">Liste des participants: {{ particip.users|length }}</strong>
+
+                                            <br><br>
+                                            <div class="columns is-multiline">
+                                                {% for item in particip.users %}
+                                                    <div class="column is-one-fifth">
+                                                        <figure class="image is-32x32">
+                                                            <img class="is-rounded" src="https://robohash.org/{{ item.nom }}?set=set5">
+                                                        </figure>
+                                                        <div>{{item.pseudo}}</div>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                    </div>
+                                </article>
+                            </div>
+
+
+                        </div><br>
+
                     </div>
-                </div>
-            </article>
-        </div>
+                </div>  
+
     {% endfor %}
+
 
 </div>
 
 
-
-    </div>
-
-    {% endblock %}
+{% endblock %}

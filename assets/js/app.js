@@ -1,7 +1,9 @@
 // Importer le fichier SCSS
-require('../css/app.scss');
+
+import '../css/app.scss';
+
 
 
 // importer le script pour le menu mobile
 
-require('./menu.js');
+import './menu.js';

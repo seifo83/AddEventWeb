@@ -4,16 +4,29 @@
 
 {% block content %}
     {% include 'includes/flash.html.twig' %}
-    <div class="section">
+  <div class="section">
         <div class="box">
-            <h1 class="title"> {{ user.pseudo}} </h1>
-            <strong>Liste des événements:</strong>
-            <p>Vous organisez: {{ event_list|length }} évenements</p> 
+            <article class="media">
+              <div class="media-left">
+                <figure class="image is-64x64">
+                    <img class="is-rounded" src="https://robohash.org/{{ user.nom }}?set=set5">
+                </figure>
+              </div>
+              <div class="media-content">
+                <div class="content">
+                  <p>
+                    <strong class="title">{{ user.pseudo}}</strong>
+                    <br>
+                    <strong class="has-text-primary">Liste des événements:</strong><br>
+                    Vous organisez: {{ event_list|length }} évenements.
+                  </p>
+                </div>
+            </div>
         </div>
 
-            {% for event in event_list %}
-                
-            <div class="box">
+        {% for event in event_list %}
+            <div class="columns box">
+              <div class="column">
                 <article class="media">
                     <div class="media-left">
                         <figure class="image is-128x128">
@@ -23,36 +36,62 @@
                     <div class="media-content is-mobile">
                         <div class="content is-three-fifths is-offset-one-fifth">
                             <p>
-                                <a href="" class="has-text-primary">
+                                <a href="{{path('event_page' , {id: event.id})}}" class="has-text-primary">
                                     <strong>{{event.nom}}</strong>
                                 </a>
-                                <small>{{ event.date|date('d/m/Y')}}</small>
                                 <br>
-                                <small>{{ event.description|slice(0, 50)}}</small><br>
-                                <small>prix: {{ event.price}}€</small><br>
-                            </p>
-                            <div class="field is-grouped is-grouped-right">
+                                <small>Date: {{ event.date|date('d/m/Y')}}</small>
+                                <br>
+                                <small>Description: {{ event.description|slice(0, 50)}}</small><br>
+                                <small>Prix: {{ event.price}}€</small><br>
+                            <div class="field is-grouped">
                                 <p class="control">
                                   <a class="button is-primary" href="{{path('modif_event', {id: event.id} )}}">
                                     <span><i class="fas fa-edit"></i>&ensp;</span>
-                                    Submit
+                                    Modifier
                                   </a>
                                 </p>
                             {% if is_granted("EVENT_PARTICIPATION", event) %}
                                 <p class="control">
                                   <a class="button is-danger" href="{{path('event_delete', {id: event.id} )}}">
                                     <span><i class="fas fa-trash-alt"></i>&ensp;</span>
-                                    Cancel
+                                    Supprimer
                                   </a>
                                 </p>
                             {% endif %}
                               </div>
-                        </div>
+                            </p>
+                </article>
+            </div>
+
+              <div class="column is-three-fifths">
+                <article class="media is-centered ">
+                    <div class="media-content is-mobile">
+                            <strong class="has-text-primary">Liste des participants: {{ event.users|length }}</strong>
+
+                            <br><br>
+                            <div class="columns is-multiline">
+                                {% for item in event.users %}
+                                    <div class="column is-one-fifth">
+                                        <figure class="image is-32x32">
+                                            <img class="is-rounded" src="https://robohash.org/{{ item.nom }}?set=set5">
+                                        </figure>
+                                        <div>{{item.pseudo}}</div>
+                                    </div>
+                                {% endfor %}
+                            </div>
                     </div>
                 </article>
             </div>
-        {% endfor %}
 
-    </div>
+          </div><br>
 
-    {% endblock %}
+        </div>
+      </div>
+
+
+    {% endfor %}
+
+  </div>
+
+{% endblock %}

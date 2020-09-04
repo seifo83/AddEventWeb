@@ -28,18 +28,17 @@
                             <a class="button is-5 is-danger" href="{{path('participe_profil_delete', {id: event.id, token: csrf_token('delete_event')})}}">
                                 <strong>Annuler</strong>
                                 &ensp;<span><i class="fas fa-trash-alt"></i></span>
-                                
                             </a>
                         {% else %}
                             <div class="field is-grouped">
                                 <p class="control">
                                     <a class="button is-danger" href="{{path('participe_profil', {id: event.id, token: csrf_token('event_participation')})}}">
                                         <strong>Participer</strong>
-                                        
+
                                     </a>
                                 </p>
                                 <p class="control">
-                                    <a class="button is-danger" href="{{path('participe_profil', {id: event.id, token: csrf_token('event_participation')})}}">
+                                    <a class="button is-danger" href="{{path('mail_event')}}">
                                         <strong>Inviter</strong>
                                         &ensp;<span><i class="fas fa-envelope"></i></span>
                                     </a>
@@ -69,7 +68,6 @@
                         {{ event.description }}
                     </p>
                     <hr>
-
                     <h1 class="title has-text-primary">
                         Liste des participants: {{ event.users|length }}
                     </h1><br>
@@ -77,12 +75,12 @@
 
                         {% for item in event.users %}
                             <div class="column is-one-fifth">
-                            <figure class="image is-64x64">
-                                <img class="is-rounded" src="https://robohash.org/{{ item.nom }}?set=set5">
-                            </figure>
-                            <div>{{item.pseudo}}</div>
+                                <figure class="image is-64x64">
+                                    <img class="is-rounded" src="https://robohash.org/{{ item.nom }}?set=set5">
+                                </figure>
+                                <div>{{item.pseudo}}</div>
 
-                        </div>
+                            </div>
                         {% endfor %}
                     </div>
 

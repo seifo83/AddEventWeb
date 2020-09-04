@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Event;
 use App\Form\ConfirmDeletionFormType;
 use App\Form\EventFormType;
+use App\Form\MailParticipeFormType;
 use App\Repository\EventRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -45,13 +46,13 @@ class EventController extends AbstractController
     public function eventPage(Event $event)
     {
         //dd($artist);
+        //dd($event);
         return $this->render('event/Page_event.html.twig', [
             'event' => $event
 
         ]);
 
     }
-
 
 
 
@@ -65,7 +66,7 @@ class EventController extends AbstractController
         //dd($user);
 
         $event = $eventRepository->findBy(['user' => $this->getUser()]);
-
+        //dd($event);
         return $this->render('event/liste_event_profil.html.twig', [
             'event_list' => $event,
             'user' => $user
@@ -82,11 +83,6 @@ class EventController extends AbstractController
     {
         return $this->render('event/theme_event.html.twig');
     }
-
-
-
-
-
 
 
 
@@ -173,12 +169,25 @@ class EventController extends AbstractController
     }
 
 
+    /**
+     * Afficher formuliare et envouer un email
+     * @Route("/mail_event", name="mail_event")
+     */
+    public function mail_event(Request $request)
+    {
+        $form = $this->createForm(MailParticipeFormType::class);
+        $form->handleRequest($request);
 
-    
+        if($form->isSubmitted() && $form->isValid())
+         {
+             //traitement du formuliare
+         }
 
+         return $this->render('participe/mail.participe.html.twig', [
 
-
-
+            'mail_event' => $form->createView(),
+        ]);
+    }
 
 
 
