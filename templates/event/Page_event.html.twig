@@ -22,6 +22,9 @@
                     <h1 class="title has-text-primary">
                         {{ event.nom }}
                     </h1><br>
+                    <a class="button box is-danger" href="{{path('participe_event', {id: event.id})}}">
+                        Participer
+                    </a><br>
                     <h2 class="subtitle">
                         Organisé par:
                         <a href="">
@@ -42,9 +45,25 @@
                         {{ event.description }}
                     </p>
                     <hr>
-                    <a class="button box is-danger" href="{{path('participe_event', {id: event.id})}}">
-                        Participer
-                    </a>
+                    
+                    <h1 class="title has-text-primary">
+                        Liste des participants: {{ event.users|length }}
+                    </h1><br>
+                    <div class="columns is-multiline">
+                        
+                        {% for item in event.users %}
+                            <div class="column is-one-fifth">
+                            <figure class="image is-64x64">
+                                <img class="is-rounded" src="https://robohash.org/{{ item.nom }}?set=set5">
+                            </figure>
+                            <div>{{item.prenom}}</div>
+
+                        </div>
+                        {% endfor %}
+                        
+                    </div>
+
+
                 </div>
             </div>
         </section>
